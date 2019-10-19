@@ -32,7 +32,7 @@ We'll continue to build out our chat bot and bring all the components together.
 
 ### Acknowledgements
 
-** "Original Coast Clothing" chatbot
-** Spark AR Studio
+* "Original Coast Clothing" chatbot
+* Spark AR Studio
 
 
