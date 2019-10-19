@@ -1,144 +1,38 @@
-# Original Coast Clothing Messenger Bot
+### Inspiration
 
-Original Coast Clothing (OC) is a fictional clothing brand created to showcase key features of the Messenger Platform. OC leverages key features to deliver a great customer experience. Using this demo as inspiration, you can create a delightful messaging experience that leverages both automation and live customer support. We are also providing the open source code of the app and a guide to deploy the experience on your local environment or remote server.
+With so many fitness apps, we wanted to curate a way for our fitBuddies to find a fitness plan tailored to them. We wanted a fitness plan to be fully integrated into Messenger, so "Fit for Me" can provide encouragement and track progress directly from Messenger. 
 
-[Access the Messenger experience](https://m.me/OriginalCoastClothing?ref=GITHUB)
+### What it does it do
 
-![Messenger Experience](public/experience.png)
+After being asked a series of questions like weight range, height, fitness goals, and previous activity, "Fit for Me" will pair you with one or two fitness plans from apps like Runkeeper, MindBody, a nearby Meetup group, or another popular app. Depending on how frequent our fitBuddies want to track progress, they can take a photo and share it on Facebook. Headbands and other accessories from brands can be added to photos using Spark AR. 
 
-See the [Developer Documentations on this experience](https://developers.facebook.com/docs/messenger-platform/getting-started/sample-apps/original-coast-clothing).
+### How we built it
 
-# Setting up your Messenger App
+The chat bot was built using "facebook for developers" documentation written in javascript. We used Sketch to make the wireframes. To motivate and give fitBuddies the opportunity to share progress, Spark AR was used to capture photos and add accessories. 
 
-## Requirements
+### Challenges we ran into
 
-- **Facebook Page:** Will be used as the identity of your messaging experience. When people chat with your page. To create a new Page, visit https://www.facebook.com/pages/create.
-- **Facebook Developer Account:** Required to create new apps, which are the core of any Facebook integration. You can create a new developer account by going to the [Facebook Developers website](https://developers.facebook.com/) and clicking the "Get Started" button.
-- **Facebook App:** Contains the settings for your Messenger automation, including access tokens. To create a new app, visit your [app dashboard](https://developers.facebook.com/apps).
+Spark AR: We originally wanted to use Spark AR to do body segmentation and recognition. With the ability to identify a person's arms, legs, and torso, we planned to project their current body in gray and have their "goal" body overlaid on top. This proved to be tricky with current technologies since just changing the x-axis percentage wouldn't be enough. We're excited to see how that technology progresses. 
 
-## Setup Steps
+Messenger: We found the lack of a messenger boilerplate challenging for 8 hours. We planned to modify the "Original Coast Clothing" chatbot and soon realized that the control flow was too complex to modify. A tree-based software similar to Spark AR Studio would have made the process much faster since the classes couldn't be easily modified without diving deeply into the code. 
 
-Before you begin, make sure you have completed all of the requirements listed above. At this point you should have a Page and a registered Facebook App.
+Deploying: We found having a package-lock.json and yarn.lock simulatenously crashed our heroku. It took us a long time to resolve this issue. 
 
-#### Get the App id and App Secret
+### Accomplishments that we're proud of
 
-1. Go to your app Basic Settings, [Find your app here](https://developers.facebook.com/apps)
-2. Save the **App ID** number and the **App Secret**
+We are proud of our wireframes and how much we learned in a short period time. 
 
-#### Grant  Messenger access to your Facebook App
+### What we learned
 
-1. Go to your app Dashboard
-2. Under Add Product find Messenger and click Set Up
-3. Now you should be in the App Messenger Settings
-4. Under Access Tokens, click on Edit Permissions
-5. Select the desired page and allow Manage and access Page conversations in Messenger
-6. Select the desired page and an access token should appear
-7. Get the Page ID from the page access token by using the [Access Token Debugger](https://developers.facebook.com/tools/debug/accesstoken/)
-8. In the section Built-In NLP, select your page and enable the toggle
+For some of us, it was our first exposure to AR. Also, our first hackathon. :) 
 
-# Installation
+### What's next for Fit for Me
 
-Clone this repository on your local machine:
+We'll continue to build out our chat bot and bring all the components together. 
 
-```bash
-$ git clone git@github.com:fbsamples/original-coast-clothing.git
-$ cd original-coast-clothing
-```
+### Acknowledgements
 
-You will need:
+** "Original Coast Clothing" chatbot
+** Spark AR Studio
 
-- [Node](https://nodejs.org/en/) 10.x or higher
-- [Localtunnel](https://github.com/localtunnel/localtunnel) or remote server like [Heroku](https://www.heroku.com/)
 
-# Usage
-
-## Using Local Tunnel
-
-#### 1. Install the dependencies
-
-```bash
-$ npm install
-```
-
-Alternatively, you can use [Yarn](https://yarnpkg.com/en/):
-
-```bash
-$ yarn install
-```
-
-#### 2. Install Local Tunnel
-```bash
-npm install -g localtunnel
-```
-
-Open a new terminal tab and request a tunnel to your local server with your preferred port
-```bash
-lt --port 3000
-```
-
-#### 3. Rename the file `.sample.env` to `.env`
-
-```bash
-mv .sample.env .env
-```
-
- Edit the `.env` file to add all the values for your app and page. Then run your app locally using the built-in web server
-
-#### 4. Run your app locally using the built-in web server<
-
-```bash
-node app.js
-```
-
-You should now be able to access the application in your browser at [http://localhost:3000](http://localhost:3000)
-
-#### 5. Configure your webhook subcription and set the Messenger profile
-
-Use the `VERIFY_TOKEN` that you created in `.env` file and call the **/profile** endpoint like so:
-```
-http://localhost:3000/profile?mode=all&verify_token=verify-token
-```
-
-#### 6. Test that your app setup is successful
-
-Send a message to your Page from Facebook or in Messenger, if your webhook receives an event, you have fully set up your app! Voilà!
-
-## Using Heroku
-#### 1. Install the Heroku CLI
-
-Download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
-
-#### 2. Create an app from the CLI
-
-```bash
-git init
-heroku apps:create
-# Creating app... done, ⬢ mystic-wind-83
-# Created http://mystic-wind-83.herokuapp.com/ | git@heroku.com:mystic-wind-83.git
-```
-
-#### 3. Deploy the code
-```bash
-git add .
-git commit -m "My first commit"
-git push heroku master
-```
-
-#### 4. Set your environment variables
-  In your Heroku App Dashboard [https://dashboard.heroku.com/apps/mystic-wind-83](https://dashboard.heroku.com/apps/mystic-wind-83) set up the config vars following the comments in the file ```.sample.env```
-
-#### 5. Configure your webhook subscription and set the Messenger profile
-  You should now be able to access the application. Use the ```VERIFY_TOKEN``` that you created as config vars and call the **/profile** endpoint like so:
-
-  ```
-  http://mystic-wind-83.herokuapp.com/profile?mode=all&verify_token=verify-token
-  ```
-
-#### 6. Test that your app setup is successful
-
-  Send a message to your Page from Facebook or in Messenger, if your webhook receives an event, you have fully set up your app! Voilà!
-
-## License
-Sample Messenger App Original Coast Clothing is BSD licensed, as found in the LICENSE file.
-
-See the [CONTRIBUTING](CONTRIBUTING.md) file for how to help out.
