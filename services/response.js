@@ -135,7 +135,7 @@ module.exports = class Response {
 
     let curation = this.genQuickReply(i18n.__('get_started.help'), [
       {
-        title: i18n.__('menu.fitnessPlan'),
+        title: i18n.__('menu.curation'),
         payload: 'GOALS',
       },
       {
